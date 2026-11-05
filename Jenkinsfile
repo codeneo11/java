@@ -15,9 +15,9 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'tosh-dock', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
           sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
-          sh 'docker build -t tosh/java-app .'
-          sh 'docker run --rm tosh/java-app'
-          sh 'docker push tosh/java-app'
+          sh 'docker build -t $DOCKER_USER/java-app .'
+          sh 'docker run --rm $DOCKER_USER/java-app'
+          sh 'docker push $DOCKER_USER/java-app'
           sh 'docker logout'
         }
       }
