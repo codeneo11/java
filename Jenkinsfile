@@ -13,7 +13,7 @@ pipeline {
     }
     stage("Push to docker") {
       steps {
-        withCredentials([usernamePassword(credentials: 'tosh-dock', username: 'DOCKER_USER', pass: 'DOCKER_PASS')]) {
+        withCredentials([usernamePassword(credentialsId: 'tosh-dock', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
           sh 'echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin'
           sh 'docker build -t tosh/java-app .'
           sh 'docker run --rm tosh/java-app'
