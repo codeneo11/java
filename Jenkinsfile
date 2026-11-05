@@ -2,16 +2,17 @@ pipeline {
   agent any
   stages {
     stage("Pull from Github") {
-      step {      
+      steps {      
         sh 'git clone https://github.com/codeneo11/java.git'
       }
     }
     stage("Compile code") {
-      step {
+      steps {
         sh 'javac Hello.java'
       }
-    stage("Execute app")
-      step {
+    }
+    stage("Execute app") {
+      steps {
         sh 'java Hello.java'
       }
     }
